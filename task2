@@ -1,0 +1,84 @@
+import socket
+
+# Function to get the target IP address from the domain name
+
+
+def get_target_ip(domain):
+    try:
+        return socket.gethostbyname(domain)  # Resolve domain to IP address
+    except socket.gaierror:
+        print(f"Error: Unable to resolve domain '{domain}' to an IP address.")
+        return None  # Return None if the domain cannot be resolved
+
+# Function to scan common ports on the target IP address
+
+
+def scan_ports(target_ip):
+    open_ports = []
+    common_ports = [21, 22, 23, 25, 53, 80, 110, 135, 139, 143, 443, 445, 3389]  # Common ports to scan
+    for port in common_ports:
+        try:
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  # Create a TCP socket
+            sock.settimeout(0.5)  # Set timeout for the connection attempt
+            result = sock.connect_ex((target_ip, port))  # Attempt to connect to the port
+            if result == 0:
+                open_ports.append(port)  # If connection is successful, port is open
+            sock.close()  # Close the socket after each attempt
+        except Exception as e:
+            print(f"Error scanning port {port}: {e}")  # Print any errors that occur during scanning
+    return open_ports  # Return the list of open ports
+
+# Function to check for outdated software (placeholder implementation)
+
+
+def check_outdated_software():
+    # Placeholder: Normally, you'd query a service or database for version checks
+    return ["Apache 2.2 (Outdated)", "OpenSSH 6.0 (Outdated)"]  # Dummy outdated software list
+
+# Function to check for misconfigurations based on open ports (placeholder implementation)
+
+
+def check_misconfigurations(open_ports):
+    misconfigurations = []
+    # Example misconfiguration: HTTP (port 80) open without HTTPS (port 443)
+    if 80 in open_ports and 443 not in open_ports:
+        misconfigurations.append("HTTP open without HTTPS")  # Add misconfiguration to the list
+
+    # Add more checks as needed
+    return misconfigurations  # Return the list of detected misconfigurations
+
+# Function to perform the vulnerability scan on a given domain
+
+
+def perform_scan(domain):
+    target_ip = get_target_ip(domain)  # Get the IP address of the domain
+    if not target_ip:
+        return  # Exit if the domain cannot be resolved
+
+    print(f"Scanning target: {target_ip}")
+    open_ports = scan_ports(target_ip)  # Scan for open ports on the target IP
+    outdated_software = check_outdated_software()  # Check for outdated software
+    misconfigurations = check_misconfigurations(open_ports)  # Check for misconfigurations
+
+    # Print the scan results
+    print(f"\nScan Results for {domain}:")
+
+    if open_ports:
+        print(f"Open Ports: {', '.join(map(str, open_ports))}")  # Print the list of open ports
+    else:
+        print("No open ports found.")  # Inform the user if no open ports were found
+
+    if outdated_software:
+        print(f"Outdated Software: {', '.join(outdated_software)}")  # Print the list of outdated software
+    else:
+        print("No outdated software detected.")  # Inform the user if no outdated software was found
+
+    if misconfigurations:
+        print(f"Misconfigurations: {', '.join(misconfigurations)}")  # Print the list of misconfigurations
+    else:
+        print("No misconfigurations detected.")  # Inform the user if no misconfigurations were found
+
+
+if __name__ == "__main__":
+    domain = input("Enter the domain or IP to scan: ")  # Prompt the user for a domain or IP to scan
+    perform_scan(domain)  # Perform the vulnerability scan on the provided domain or IP
