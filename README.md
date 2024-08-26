@@ -31,13 +31,18 @@ https://github.com/user-attachments/assets/dc305ee1-754f-4dba-9409-8388a709dd4c
 ## Technologies Used:
 
 - *Python:* For implementing the core scanning logic and processing the results.
+  
 - *Socket Programming:* For detecting open ports and network services.
+  
 - *Banner Grabbing:* For identifying software versions and potential vulnerabilities.
 
 ## Key Insights:
 
-- *Security Analysis:* Enhanced understanding of how to identify and address common vulnerabilities in networks and websites.
+*Security Analysis:* Enhanced understanding of how to identify and address common vulnerabilities in networks and websites.
+
 *Proactive Security:* Emphasized the importance of regular vulnerability assessments to maintain robust security.
+
 *Real-World Application:* Applied cybersecurity knowledge to create a tool that can be used in practical scenarios for improving security postures.
+
 
 This project underscores the importance of continuous security assessment in protecting networks and websites from potential threats.
