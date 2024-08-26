@@ -21,8 +21,11 @@ https://github.com/user-attachments/assets/dc305ee1-754f-4dba-9409-8388a709dd4c
 ## Key Features:
 
 1.*Vulnerability Detection:* Scans for common security issues like open ports, outdated software, and misconfigurations.
+
 2.*Detailed Reporting:* Provides comprehensive reports highlighting the identified vulnerabilities and their potential risks.
+
 3.*Security Recommendations:* Offers actionable advice to address the detected vulnerabilities and strengthen security.
+
 4.*Network and Website Analysis:* Performs thorough analysis across both network and web domains for a wide-ranging security check.
 
 ## Technologies Used:
